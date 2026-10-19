@@ -13,14 +13,19 @@ const selectedProductInput = document.getElementById('selected-product');
 // Перебираем все кнопки «Заказать».
 orderButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        // Получаем название товара из data-атрибута.
         const productName = button.dataset.product;
-
-        // Записываем название товара в скрытое поле формы.
         selectedProductInput.value = productName;
-
-        // Открываем модальное окно.
+        
         orderDialog.showModal();
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+            const nameInput = document.getElementById('order-name');
+            if (nameInput) {
+                // preventScroll: true не дает окну прокручиваться при фокусе
+                nameInput.focus({ preventScroll: true }); 
+            }
+        }, 50);
     });
 });
 
@@ -71,4 +76,31 @@ orderForm.addEventListener('submit', (event) => {
 
     // Закрываем модальное окно.
     orderDialog.close();
+});
+
+// Улучшенное модальное окно: закрытие по крестику и клику на фон
+const closeDialogX = document.querySelector('.order-dialog__close');
+
+if (closeDialogX) {
+    closeDialogX.addEventListener('click', () => {
+        orderDialog.close();
+    });
+}
+
+// Закрытие по клику на затемненный фон (backdrop)
+orderDialog.addEventListener('click', (event) => {
+    const rect = orderDialog.getBoundingClientRect();
+    const isInDialog = (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+    );
+    
+    if (!isInDialog) {
+        orderDialog.close();
+    }
+});
+orderDialog.addEventListener('close', () => {
+    document.body.style.overflow = '';
 });

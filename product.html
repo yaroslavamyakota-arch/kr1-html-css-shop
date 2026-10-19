@@ -179,10 +179,9 @@
         <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
     </footer>
 
-    <!-- Модальное окно (копируем, чтобы кнопка "Заказать" работала) -->
     <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
         <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
-
+        <button class="order-dialog__close" type="button" aria-label="Закрыть окно">×</button>
         <form class="order-form" id="order-form" action="#" method="post" novalidate>
 
             <input id="selected-product" name="selected-product" type="hidden">

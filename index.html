@@ -66,6 +66,7 @@
             <div class="products-grid">
 
                 <article class="product-card">
+                    <img src="images/protein1.jpg" alt="Optimum Nutrition Plant Protein" class="product-card__img">
                     <h3 class="product-card__title">Optimum Nutrition Plant Protein</h3>
                     <p class="product-card__description">100% растительный протеин, сливочная ваниль, 740 г.</p>
                     <p class="product-card__price">Цена: 4500 руб.</p>
@@ -77,6 +78,7 @@
 
                 <article class="product-card product-card--discount">
                     <span class="product-card__badge">Скидка</span>
+                    <img src="images/protein2.jpg" alt="PERFECT Sports Diesel" class="product-card__img">
                     <h3 class="product-card__title">PERFECT Sports Diesel</h3>
                     <p class="product-card__description">Веганская смесь, ванильное мороженое, 700 г.</p>
                     <p class="product-card__price">Цена: 5200 руб.</p>
@@ -87,6 +89,7 @@
                 </article>
 
                 <article class="product-card">
+                    <img src="images/protein3.jpg" alt="Sunwarrior Classic Plus" class="product-card__img">
                     <h3 class="product-card__title">Sunwarrior Classic Plus</h3>
                     <p class="product-card__description">Органический растительный протеин, ваниль, 750 г.</p>
                     <p class="product-card__price">Цена: 4800 руб.</p>
@@ -97,6 +100,7 @@
                 </article>
 
                 <article class="product-card">
+                    <img src="images/protein4.jpg" alt="Macrolife Naturals Macro Meal" class="product-card__img">
                     <h3 class="product-card__title">Macrolife Naturals Macro Meal</h3>
                     <p class="product-card__description">Растительный белок, MCT и суперфуды, ваниль, 615 г.</p>
                     <p class="product-card__price">Цена: 5500 руб.</p>
@@ -107,6 +111,7 @@
                 </article>
 
                 <article class="product-card">
+                    <img src="images/protein5.jpg" alt="Orgain Organic Protein" class="product-card__img">
                     <h3 class="product-card__title">Orgain Organic Protein</h3>
                     <p class="product-card__description">Органический протеин + 50 суперфудов, шоколад, 918 г.</p>
                     <p class="product-card__price">Цена: 6200 руб.</p>
@@ -119,6 +124,53 @@
             </div>
         </section>
 
+        <!-- БЛОК ОТЗЫВОВ -->
+        <section class="section" id="reviews">
+            <h2 class="section__title">Отзывы наших покупателей</h2>
+            <div class="reviews__list">
+                <article class="reviews__item">
+                    <div class="reviews__author">Алексей</div>
+                    <div class="reviews__rating">★★★★★</div>
+                    <p class="reviews__text">Отличный протеин! Беру уже второй раз, вкус ванили просто супер, размешивается без комочков.</p>
+                </article>
+                <article class="reviews__item">
+                    <div class="reviews__author">Мария</div>
+                    <div class="reviews__rating">★★★★☆</div>
+                    <p class="reviews__text">Хороший состав, полностью растительный. Немного сладковат, но в целом отличный вариант для веганов.</p>
+                </article>
+                <article class="reviews__item">
+                    <div class="reviews__author">Дмитрий</div>
+                    <div class="reviews__rating">★★★★★</div>
+                    <p class="reviews__text">Быстрая доставка, хорошо упаковано. Органику беру только здесь, качество на высоте.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- БЛОК FAQ (Часто задаваемые вопросы) -->
+        <section class="section" id="faq">
+            <h2 class="section__title">Часто задаваемые вопросы</h2>
+            <div class="faq__list">
+                <details class="faq__item">
+                    <summary class="faq__question">Подходит ли этот протеин для веганов?</summary>
+                    <div class="faq__answer">
+                        <p>Да, абсолютно весь ассортимент нашего магазина состоит из 100% растительных протеинов. Они не содержат лактозы, сои и продуктов животного происхождения.</p>
+                    </div>
+                </details>
+                <details class="faq__item">
+                    <summary class="faq__question">Как правильно принимать протеин?</summary>
+                    <div class="faq__answer">
+                        <p>Смешайте одну порцию (мерную ложку) с 200-300 мл воды, растительного молока или сока. Лучше всего принимать в течение 30 минут после тренировки.</p>
+                    </div>
+                </details>
+                <details class="faq__item">
+                    <summary class="faq__question">Есть ли у вас доставка?</summary>
+                    <div class="faq__answer">
+                        <p>Да, мы доставляем заказы по всей России. Сроки и стоимость зависят от вашего региона. Оставьте заявку, и менеджер рассчитает точную стоимость.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+        
         <aside class="aside-info">
             <h2 class="aside-info__title">Информация для студентов</h2>
             <p class="aside-info__text">
@@ -137,6 +189,7 @@
 
     <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
         <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+        <button class="order-dialog__close" type="button" aria-label="Закрыть окно">×</button>
 
         <form class="order-form" id="order-form" action="#" method="post" novalidate>
 
