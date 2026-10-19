@@ -656,3 +656,9 @@ a:focus-visible {
 .product-page--discount .button:hover {
     background-color: #8a0019;
 }
+
+.product-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: auto;
+}
