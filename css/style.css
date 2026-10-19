@@ -199,7 +199,7 @@ a:focus-visible {
     color: var(--color-primary);
 }
 
-.breadcrumbs__current::before {
+.breadcrumbs > *:not(:first-child)::before {
     content: " / ";
     color: var(--color-muted);
 }
@@ -232,6 +232,7 @@ a:focus-visible {
     max-width: var(--container-width);
     margin: 0 auto var(--space-xl);
     padding: 0 var(--space-lg);
+    scroll-margin-top: 100px;
 }
 
 .section__title {
@@ -353,6 +354,7 @@ a:focus-visible {
     padding: var(--space-lg);
     background-color: var(--color-surface);
     text-align: center;
+    scroll-margin-top: 100px;
 }
 
 .site-footer__text {
@@ -550,4 +552,107 @@ a:focus-visible {
 .up-button:hover {
     background-color: var(--color-primary-dark);
     transform: translateY(-3px); /* слегка подпрыгивает при наведении */
+}
+
+/* ===================================
+   СТРАНИЦА ТОВАРА (product.html)
+   =================================== */
+
+.product-page__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.product-page__image-placeholder {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-muted);
+    font-weight: bold;
+}
+
+.product-page__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 0;
+}
+
+.product-page__desc {
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+}
+
+/* Стили для таблицы характеристик */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-md);
+    background-color: var(--color-bg);
+}
+
+.product-table th,
+.product-table td {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    text-align: left;
+}
+
+.product-table th {
+    background-color: var(--color-surface);
+    font-weight: 700;
+}
+
+.product-table tr:hover td {
+    background-color: var(--color-surface-accent);
+}
+
+/* ===================================
+   СТРАНИЦА ТОВАРА (исправления)
+   =================================== */
+
+.product-page {
+    /* Отступ сверху, чтобы прилипающая шапка не перекрывала заголовок при переходе по якорю */
+    scroll-margin-top: 100px; 
+    padding-top: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-xl);
+}
+
+.product-page:last-child {
+    border-bottom: none;
+}
+
+/* Оформление страницы товара со скидкой */
+.product-page--discount .section__title {
+    color: var(--color-danger);
+}
+
+/* Стили для изображений на странице товара */
+.product-page__img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain; /* Картинка не искажается, а вписывается в блок */
+    border-radius: var(--radius-lg);
+    background-color: #ffffff; /* Белый фон, если картинка с прозрачностью */
+    padding: var(--space-md);
+}
+
+.product-page--discount .product-page__price {
+    color: var(--color-danger);
+}
+
+.product-page--discount .button {
+    background-color: var(--color-danger);
+}
+
+.product-page--discount .button:hover {
+    background-color: #8a0019;
 }

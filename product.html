@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Подробная информация о товаре в учебном интернет-магазине.">
+    <title>Товар 1 – Учебный интернет-магазин</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="site-header__logo" href="index.html">ShopProject</a>
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="site-nav__list">
+                    <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link" href="index.html#contacts">Обратная связь</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a class="breadcrumbs__link" href="index.html">Главная</a>
+            <a class="breadcrumbs__link" href="catalog.html">Каталог</a>
+            <span class="breadcrumbs__current">Детали товаров</span>
+        </nav>
+
+        <!-- ТОВАР 1 -->
+        <section class="section product-page" id="product-1">
+            <h1 class="section__title">Optimum Nutrition, Золотой стандарт, 100% растительный протеин</h1>
+            <div class="product-page__layout">
+                <div class="product-page__image">
+                    <img src="images/protein1.jpg" alt="Optimum Nutrition" class="product-page__img">
+                </div>
+                <div class="product-page__info">
+                    <p class="product-page__price">Цена: 4500 руб.</p>
+                    <p class="product-page__desc">Сертификат Informed Choice. Сбалансированная смесь из 5 белков. Без искусственных подсластителей, сои, глютена, арахиса и лактозы. Идеально подходит для веганов и вегетарианцев. Натуральный вкус.</p>
+                    <button class="button button--primary product-page__button" type="button" data-product="Optimum Nutrition">Заказать</button>
+                </div>
+            </div>
+            <div class="product-page__table-wrapper">
+                <h2 class="section__title">Характеристики</h2>
+                <table class="product-table">
+                    <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                    <tbody>
+                        <tr><td>Бренд</td><td>Optimum Nutrition</td></tr>
+                        <tr><td>Вкус</td><td>Сливочная ваниль</td></tr>
+                        <tr><td>Вес</td><td>740 г</td></tr>
+                        <tr><td>Белка на порцию</td><td>24 г</td></tr>
+                        <tr><td>Особенности</td><td>Веганский, без глютена</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ТОВАР 2 -->
+        <section class="section product-page product-page--discount" id="product-2">
+            <h1 class="section__title">PERFECT Sports, Diesel, веганская протеиновая смесь</h1>
+            <div class="product-page__layout">
+                <div class="product-page__image">
+                    <img src="images/protein2.jpg" alt="PERFECT Sports" class="product-page__img">
+                </div>
+                <div class="product-page__info">
+                    <p class="product-page__price">Цена: 5200 руб.</p>
+                    <p class="product-page__desc">100% цельнопищевая растительная смесь. Обеспечивает 23 г чистого протеина и более 2 г амино-лейцина для роста и восстановления. Содержит Solathin® для снижения аппетита и 6 органических злаков. Одобрено для кетодиеты.</p>
+                    <button class="button button--primary product-page__button" type="button" data-product="PERFECT Sports">Заказать</button>
+                </div>
+            </div>
+            <div class="product-page__table-wrapper">
+                <h2 class="section__title">Характеристики</h2>
+                <table class="product-table">
+                    <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                    <tbody>
+                        <tr><td>Бренд</td><td>PERFECT Sports</td></tr>
+                        <tr><td>Вкус</td><td>Ванильное мороженое</td></tr>
+                        <tr><td>Вес</td><td>700 г</td></tr>
+                        <tr><td>Белка на порцию</td><td>23 г</td></tr>
+                        <tr><td>Особенности</td><td>Кето, без сои, без сахара</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ТОВАР 3 -->
+        <section class="section product-page" id="product-3">
+            <h1 class="section__title">Sunwarrior, Classic Plus протеин</h1>
+            <div class="product-page__layout">
+                <div class="product-page__image">
+                    <img src="images/protein3.jpg" alt="Sunwarrior" class="product-page__img">
+                </div>
+                <div class="product-page__info">
+                    <p class="product-page__price">Цена: 4800 руб.</p>
+                    <p class="product-page__desc">Пророщенные и ферментированные ингредиенты: коричневый рис, бобовые, семена чиа, киноа и амарант. 18 г протеина и 4 г BCAA. Бережно относится к пищеварению, содержит натуральную клетчатку, витамины и минералы. Сертификат USDA Organic.</p>
+                    <button class="button button--primary product-page__button" type="button" data-product="Sunwarrior">Заказать</button>
+                </div>
+            </div>
+            <div class="product-page__table-wrapper">
+                <h2 class="section__title">Характеристики</h2>
+                <table class="product-table">
+                    <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                    <tbody>
+                        <tr><td>Бренд</td><td>Sunwarrior</td></tr>
+                        <tr><td>Вкус</td><td>Ваниль</td></tr>
+                        <tr><td>Вес</td><td>750 г</td></tr>
+                        <tr><td>Белка на порцию</td><td>18 г</td></tr>
+                        <tr><td>Особенности</td><td>Органический, без ГМО</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ТОВАР 4 -->
+        <section class="section product-page" id="product-4">
+            <h1 class="section__title">Macrolife Naturals, Macro Meal®</h1>
+            <div class="product-page__layout">
+                <div class="product-page__image">
+                    <img src="images/protein4.jpg" alt="Macrolife Naturals" class="product-page__img">
+                </div>
+                <div class="product-page__info">
+                    <p class="product-page__price">Цена: 5500 руб.</p>
+                    <p class="product-page__desc">Растительный белок, MCT и суперфуды. Содержит 25 г протеина с замедленным высвобождением, 72 микроэлемента и 3 млрд пробиотиков. Порошок из кокосового масла MCT поддерживает уровень энергии. Подходит для кетодиеты. Без глютена и ГМО.</p>
+                    <button class="button button--primary product-page__button" type="button" data-product="Macrolife Naturals">Заказать</button>
+                </div>
+            </div>
+            <div class="product-page__table-wrapper">
+                <h2 class="section__title">Характеристики</h2>
+                <table class="product-table">
+                    <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                    <tbody>
+                        <tr><td>Бренд</td><td>Macrolife Naturals</td></tr>
+                        <tr><td>Вкус</td><td>Ванильный</td></tr>
+                        <tr><td>Вес</td><td>615 г</td></tr>
+                        <tr><td>Белка на порцию</td><td>25 г</td></tr>
+                        <tr><td>Особенности</td><td>Кето, суперфуды, без сахара</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ТОВАР 5 -->
+        <section class="section product-page" id="product-5">
+            <h1 class="section__title">Orgain, органический протеин + 50 суперфудов</h1>
+            <div class="product-page__layout">
+                <div class="product-page__image">
+                    <img src="images/protein5.jpg" alt="Orgain" class="product-page__img">
+                </div>
+                <div class="product-page__info">
+                    <p class="product-page__price">Цена: 6200 руб.</p>
+                    <p class="product-page__desc">Ваш любимый органический протеиновый порошок на растительной основе добавляет в вашу ежедневную порцию питания более 50 суперфудов (горох, чиа, кудрявая капуста, лён, киноа, свёкла, куркума). Содержит 21 г растительного протеина и 10 г пребиотика + клетчатка.</p>
+                    <button class="button button--primary product-page__button" type="button" data-product="Orgain">Заказать</button>
+                </div>
+            </div>
+            <div class="product-page__table-wrapper">
+                <h2 class="section__title">Характеристики</h2>
+                <table class="product-table">
+                    <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                    <tbody>
+                        <tr><td>Бренд</td><td>Orgain</td></tr>
+                        <tr><td>Вкус</td><td>Сливочно-шоколадный фадж</td></tr>
+                        <tr><td>Вес</td><td>918 г</td></tr>
+                        <tr><td>Белка на порцию</td><td>21 г</td></tr>
+                        <tr><td>Особенности</td><td>50 суперфудов, пребиотики</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="site-footer__text">&copy; 2026 Учебный проект. Все права защищены.</p>
+        <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
+    </footer>
+
+    <!-- Модальное окно (копируем, чтобы кнопка "Заказать" работала) -->
+    <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+        <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+        <form class="order-form" id="order-form" action="#" method="post" novalidate>
+            <input id="selected-product" name="selected-product" type="hidden">
+            <div class="order-form__field">
+                <label class="order-form__label" for="order-name">Имя</label>
+                <input class="order-form__input" id="order-name" name="name" type="text" required>
+            </div>
+            <div class="order-form__field">
+                <label class="order-form__label" for="order-phone">Телефон</label>
+                <input class="order-form__input" id="order-phone" name="phone" type="tel" required>
+            </div>
+            <div class="order-form__actions">
+                <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
+                <button class="button button--primary" type="submit">Отправить</button>
+            </div>
+        </form>
+    </dialog>
+
+    <p class="success-message" id="success-message" role="alert" hidden>Форма успешно отправлена!</p>
+    <a href="#" class="up-button" aria-label="Наверх">↑</a>
+
+</body>
+</html>
