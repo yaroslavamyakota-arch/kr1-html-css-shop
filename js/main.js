@@ -1,106 +1,346 @@
-// Получаем модальное окно по id.
-const orderDialog = document.getElementById('order-dialog');
+// РћСЃРЅРѕРІРЅС‹Рµ РґРµР№СЃС‚РІРёСЏ СЃР°Р№С‚Р° PlantFuel
 
-// Получаем все кнопки заказа в карточках товаров.
-const orderButtons = document.querySelectorAll('.product-card__button, .product-page__button');
+document.addEventListener('DOMContentLoaded', function () {
+    // РњРѕР±РёР»СЊРЅРѕРµ РјРµРЅСЋ
+    const menuButton = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.site-nav');
+    if (menuButton && menu) {
+        menuButton.addEventListener('click', function () {
+            menu.classList.toggle('is-open');
+            menuButton.setAttribute('aria-expanded', String(menu.classList.contains('is-open')));
+        });
+    }
 
-// Получаем кнопку закрытия модального окна.
-const closeDialogButton = document.getElementById('close-order-dialog');
+    // РљРѕСЂР·РёРЅР° СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РїСЂРё РїРµСЂРµС…РѕРґРµ РјРµР¶РґСѓ СЃС‚СЂР°РЅРёС†Р°РјРё СЃР°Р№С‚Р°
+    let cart = [];
+    try {
+        cart = JSON.parse(sessionStorage.getItem('plantfuel-cart')) || [];
+    } catch (error) {
+        cart = [];
+    }
 
-// Получаем скрытое поле, в которое будет записан выбранный товар.
-const selectedProductInput = document.getElementById('selected-product');
+    function saveCart() {
+        try {
+            sessionStorage.setItem('plantfuel-cart', JSON.stringify(cart));
+        } catch (error) {
+            // РљРѕСЂР·РёРЅР° РїСЂРѕРґРѕР»Р¶РёС‚ СЂР°Р±РѕС‚Р°С‚СЊ РґРѕ РїРµСЂРµС…РѕРґР° СЃРѕ СЃС‚СЂР°РЅРёС†С‹.
+        }
+    }
+    const cartPanel = document.getElementById('cart-panel');
+    const cartBackdrop = document.querySelector('.cart-backdrop');
+    const cartItems = document.getElementById('cart-items');
+    const cartCount = document.querySelector('[data-cart-count]');
+    const cartTotal = document.getElementById('cart-total');
+    const orderDialog = document.getElementById('order-dialog');
+    const orderForm = document.getElementById('order-form');
+    const selectedProduct = document.getElementById('selected-product');
+    const orderSummary = document.getElementById('order-cart-summary');
+    const successMessage = document.getElementById('success-message');
 
-// Перебираем все кнопки «Заказать».
-orderButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const productName = button.dataset.product;
-        selectedProductInput.value = productName;
-        
-        orderDialog.showModal();
-        document.body.style.overflow = 'hidden';
+    function showCart() {
+        if (!cartItems) return;
+        cartItems.innerHTML = '';
+        let total = 0;
+        let amount = 0;
 
-        setTimeout(() => {
-            const nameInput = document.getElementById('order-name');
-            if (nameInput) {
-                // preventScroll: true не дает окну прокручиваться при фокусе
-                nameInput.focus({ preventScroll: true }); 
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="cart-empty">РљРѕСЂР·РёРЅР° РїРѕРєР° РїСѓСЃС‚Р°. Р”РѕР±Р°РІСЊС‚Рµ С‚РѕРІР°СЂС‹ РёР· РєР°С‚Р°Р»РѕРіР°.</p>';
+        }
+
+        cart.forEach(function (item, index) {
+            const sum = item.price * item.quantity;
+            total += sum;
+            amount += item.quantity;
+            const row = document.createElement('div');
+            row.className = 'cart-item';
+            row.innerHTML = `
+                <div class="cart-item__name">${item.name}</div>
+                <div class="cart-item__price">${sum.toLocaleString('ru-RU')} в‚Ѕ</div>
+                <div class="cart-item__controls">
+                    <button type="button" data-action="minus" data-index="${index}">в€’</button>
+                    <span>${item.quantity}</span>
+                    <button type="button" data-action="plus" data-index="${index}">+</button>
+                    <button type="button" data-action="remove" data-index="${index}">РЈРґР°Р»РёС‚СЊ</button>
+                </div>`;
+            cartItems.appendChild(row);
+        });
+
+        if (cartCount) cartCount.textContent = amount;
+        if (cartTotal) cartTotal.textContent = total.toLocaleString('ru-RU') + ' в‚Ѕ';
+    }
+
+    document.querySelectorAll('[data-product]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const name = button.dataset.product;
+            const price = Number(button.dataset.price);
+            const found = cart.find(function (item) { return item.name === name; });
+            if (found) {
+                found.quantity += 1;
+            } else {
+                cart.push({ name: name, price: price, quantity: 1 });
             }
-        }, 50);
+            saveCart();
+            showCart();
+            button.textContent = 'Р”РѕР±Р°РІР»РµРЅРѕ';
+        });
     });
-});
 
-// Закрываем модальное окно по кнопке «Закрыть».
-closeDialogButton.addEventListener('click', () => {
-    orderDialog.close();
-});
+    document.querySelectorAll('[data-cart-open]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            if (cartPanel) cartPanel.hidden = false;
+            if (cartBackdrop) cartBackdrop.hidden = false;
+        });
+    });
+    document.querySelectorAll('[data-cart-close]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            if (cartPanel) cartPanel.hidden = true;
+            if (cartBackdrop) cartBackdrop.hidden = true;
+        });
+    });
 
-// Получаем форму заявки.
-const orderForm = document.getElementById('order-form');
+    if (cartItems) {
+        cartItems.addEventListener('click', function (event) {
+            const button = event.target.closest('[data-action]');
+            if (!button) return;
+            const item = cart[Number(button.dataset.index)];
+            if (!item) return;
+            if (button.dataset.action === 'plus') item.quantity += 1;
+            if (button.dataset.action === 'minus') item.quantity -= 1;
+            if (button.dataset.action === 'remove' || item.quantity <= 0) {
+                cart.splice(Number(button.dataset.index), 1);
+            }
+            saveCart();
+            showCart();
+        });
+    }
 
-// Получаем сообщение об успешной отправке.
-const successMessage = document.getElementById('success-message');
+    const clearButton = document.querySelector('[data-cart-clear]');
+    if (clearButton) {
+        clearButton.addEventListener('click', function () {
+            cart = [];
+            saveCart();
+            showCart();
+        });
+    }
 
-// Обрабатываем отправку формы.
-orderForm.addEventListener('submit', (event) => {
-    // Отменяем стандартную отправку формы,
-    // потому что backend пока не подключён.
-    event.preventDefault();
+    const checkoutButton = document.querySelector('[data-checkout]');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', function () {
+            if (cart.length === 0) return;
+            let total = 0;
+            let description = '';
+            cart.forEach(function (item) {
+                total += item.price * item.quantity;
+                description += item.name + ' вЂ” ' + item.quantity + ' С€С‚.\n';
+            });
+            if (selectedProduct) selectedProduct.value = description;
+            if (orderSummary) {
+                orderSummary.hidden = false;
+                orderSummary.textContent = 'РЎРѕСЃС‚Р°РІ Р·Р°РєР°Р·Р°:\n' + description + 'РС‚РѕРіРѕ: ' + total.toLocaleString('ru-RU') + ' в‚Ѕ';
+            }
+            if (cartPanel) cartPanel.hidden = true;
+            if (cartBackdrop) cartBackdrop.hidden = true;
+            if (orderDialog) orderDialog.showModal();
+        });
+    }
 
-    // Сбрасываем предыдущие признаки ошибок.
-    const formElements = Array.from(orderForm.elements);
+    document.querySelectorAll('[data-order-open]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            if (orderDialog) orderDialog.showModal();
+        });
+    });
 
-    formElements.forEach((element) => {
-        if (element.willValidate) {
-            element.removeAttribute('aria-invalid');
+    const closeDialog = document.querySelector('.dialog-close');
+    if (closeDialog && orderDialog) {
+        closeDialog.addEventListener('click', function () { orderDialog.close(); });
+    }
+    if (orderForm) {
+        orderForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (!orderForm.checkValidity()) {
+                orderForm.reportValidity();
+                return;
+            }
+            if (successMessage) successMessage.hidden = false;
+            orderForm.reset();
+            cart = [];
+            saveCart();
+            showCart();
+        });
+    }
+    showCart();
+
+    // РџРѕРёСЃРє Рё С„РёР»СЊС‚СЂ С‚РѕРІР°СЂРѕРІ РІ РєР°С‚Р°Р»РѕРіРµ
+    const search = document.getElementById('search-products');
+    const priceFrom = document.getElementById('price-from');
+    const priceTo = document.getElementById('price-to');
+    const cards = document.querySelectorAll('#catalog-products .product-card');
+    function filterProducts() {
+        const phrase = search ? search.value.toLowerCase() : '';
+        const min = priceFrom && priceFrom.value ? Number(priceFrom.value) : 0;
+        const max = priceTo && priceTo.value ? Number(priceTo.value) : Infinity;
+        cards.forEach(function (card) {
+            const name = card.dataset.name.toLowerCase();
+            const price = Number(card.dataset.price);
+            card.hidden = !name.includes(phrase) || price < min || price > max;
+        });
+    }
+    [search, priceFrom, priceTo].forEach(function (field) {
+        if (field) field.addEventListener('input', filterProducts);
+    });
+    const resetFilters = document.getElementById('reset-filters');
+    if (resetFilters) {
+        resetFilters.addEventListener('click', function () {
+            if (search) search.value = '';
+            if (priceFrom) priceFrom.value = '';
+            if (priceTo) priceTo.value = '';
+            filterProducts();
+        });
+    }
+
+    // РћРєРЅРѕ РєРѕРЅСЃСѓР»СЊС‚Р°РЅС‚Р°
+    const chatButton = document.querySelector('.chat-launcher');
+    const chatPanel = document.querySelector('.chat-panel');
+    const chatClose = document.querySelector('.chat-close');
+    if (chatButton && chatPanel) {
+        chatButton.addEventListener('click', function () { chatPanel.hidden = !chatPanel.hidden; });
+    }
+    if (chatClose && chatPanel) {
+        chatClose.addEventListener('click', function () { chatPanel.hidden = true; });
+    }
+
+    // РљР°СЂСѓСЃРµР»СЊ РѕС‚Р·С‹РІРѕРІ: РєРЅРѕРїРєРё, С‚РѕС‡РєРё Рё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РїРµСЂРµРєР»СЋС‡РµРЅРёРµ
+    const reviewTrack = document.getElementById('review-track');
+    const reviews = reviewTrack ? Array.from(reviewTrack.children) : [];
+    const reviewDots = document.querySelectorAll('[data-review-dot]');
+    const reviewWindow = document.querySelector('.review-window');
+    let reviewNumber = 0;
+    let reviewTimer;
+
+    function showReview(number) {
+        if (!reviewTrack || reviews.length === 0) return;
+        reviewNumber = (number + reviews.length) % reviews.length;
+        reviewTrack.style.transform = 'translateX(-' + reviewNumber * 100 + '%)';
+        reviewDots.forEach(function (dot, index) {
+            dot.classList.toggle('is-active', index === reviewNumber);
+        });
+    }
+
+    function startReviewTimer() {
+        if (reviews.length < 2) return;
+        clearInterval(reviewTimer);
+        reviewTimer = setInterval(function () {
+            showReview(reviewNumber + 1);
+        }, 5000);
+    }
+
+    const previousReview = document.querySelector('[data-review-prev]');
+    const nextReview = document.querySelector('[data-review-next]');
+    if (previousReview) previousReview.addEventListener('click', function () {
+        showReview(reviewNumber - 1);
+        startReviewTimer();
+    });
+    if (nextReview) nextReview.addEventListener('click', function () {
+        showReview(reviewNumber + 1);
+        startReviewTimer();
+    });
+    reviewDots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+            showReview(Number(dot.dataset.reviewDot));
+            startReviewTimer();
+        });
+    });
+    if (reviewWindow) {
+        reviewWindow.addEventListener('mouseenter', function () { clearInterval(reviewTimer); });
+        reviewWindow.addEventListener('mouseleave', startReviewTimer);
+    }
+    showReview(0);
+    startReviewTimer();
+
+    // Р’С‹РїР°РґР°СЋС‰РµРµ РјРµРЅСЋ РєР°С‚Р°Р»РѕРіР°
+    document.querySelectorAll('.nav-dropdown__toggle').forEach(function (button) {
+        const dropdown = button.closest('.nav-dropdown');
+
+        button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const isOpen = dropdown.classList.toggle('is-open');
+            button.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        dropdown.querySelectorAll('.nav-dropdown__menu a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                dropdown.classList.remove('is-open');
+                button.setAttribute('aria-expanded', 'false');
+            });
+        });
+    });
+
+    // Р—Р°РєСЂС‹РІР°РµРј РјРµРЅСЋ РїСЂРё РєР»РёРєРµ РІРЅРµ РЅРµРіРѕ РёР»Рё РїРѕ Escape
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.nav-dropdown')) {
+            document.querySelectorAll('.nav-dropdown.is-open').forEach(function (dropdown) {
+                dropdown.classList.remove('is-open');
+                const button = dropdown.querySelector('.nav-dropdown__toggle');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
         }
     });
 
-    // Проверяем встроенные HTML-ограничения формы.
-    if (!orderForm.checkValidity()) {
-        formElements.forEach((element) => {
-            if (element.willValidate && !element.checkValidity()) {
-                element.setAttribute('aria-invalid', 'true');
-            }
-        });
-
-        // Показываем стандартные сообщения браузера.
-        orderForm.reportValidity();
-        return;
-    }
-
-    // Показываем сообщение об успешной отправке.
-    successMessage.hidden = false;
-
-    // Очищаем форму.
-    orderForm.reset();
-
-    // Закрываем модальное окно.
-    orderDialog.close();
-});
-
-// Улучшенное модальное окно: закрытие по крестику и клику на фон
-const closeDialogX = document.querySelector('.order-dialog__close');
-
-if (closeDialogX) {
-    closeDialogX.addEventListener('click', () => {
-        orderDialog.close();
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.nav-dropdown.is-open').forEach(function (dropdown) {
+                dropdown.classList.remove('is-open');
+                const button = dropdown.querySelector('.nav-dropdown__toggle');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
+        }
     });
-}
 
-// Закрытие по клику на затемненный фон (backdrop)
-orderDialog.addEventListener('click', (event) => {
-    const rect = orderDialog.getBoundingClientRect();
-    const isInDialog = (
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom
-    );
-    
-    if (!isInDialog) {
-        orderDialog.close();
+
+
+    // РџРѕРґСЃРєР°Р·РєР° РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ СЃРїРѕСЃРѕР±Сѓ РґРѕСЃС‚Р°РІРєРё
+    const deliveryMethod = document.getElementById('delivery-method');
+    const deliveryCity = document.getElementById('delivery-city');
+    const deliveryResult = document.getElementById('delivery-result');
+
+    function updateDeliveryInfo() {
+        if (!deliveryMethod || !deliveryResult) return;
+
+        const city = deliveryCity ? deliveryCity.value.trim() : '';
+        let title = '';
+        let message = '';
+
+        if (deliveryMethod.value === 'courier') {
+            title = 'РљСѓСЂСЊРµСЂ РїРѕ РњРѕСЃРєРІРµ';
+            message = city
+                ? 'Р”Р»СЏ Р°РґСЂРµСЃР° В«' + city + 'В» РѕСЂРёРµРЅС‚РёСЂ вЂ” 1вЂ“2 СЂР°Р±РѕС‡РёС… РґРЅСЏ. РўРѕС‡РЅСѓСЋ РґР°С‚Сѓ Рё СЃС‚РѕРёРјРѕСЃС‚СЊ РїРѕРґС‚РІРµСЂРґРёРј РїРѕСЃР»Рµ РїСЂРѕРІРµСЂРєРё Р°РґСЂРµСЃР° Рё СЃРѕСЃС‚Р°РІР° Р·Р°РєР°Р·Р°.'
+                : 'РћСЂРёРµРЅС‚РёСЂ РїРѕ РњРѕСЃРєРІРµ вЂ” 1вЂ“2 СЂР°Р±РѕС‡РёС… РґРЅСЏ. РўРѕС‡РЅСѓСЋ РґР°С‚Сѓ Рё СЃС‚РѕРёРјРѕСЃС‚СЊ РїРѕРґС‚РІРµСЂРґРёРј РїРѕСЃР»Рµ СѓС‚РѕС‡РЅРµРЅРёСЏ Р°РґСЂРµСЃР° Рё СЃРѕСЃС‚Р°РІР° Р·Р°РєР°Р·Р°.';
+        } else if (deliveryMethod.value === 'pickup') {
+            title = 'РЎР°РјРѕРІС‹РІРѕР· РІ РњРѕСЃРєРІРµ';
+            message = 'РЎР°РјРѕРІС‹РІРѕР· Р±РµСЃРїР»Р°С‚РЅС‹Р№. РћР±С‹С‡РЅРѕ Р·Р°РєР°Р· РјРѕР¶РЅРѕ Р·Р°Р±СЂР°С‚СЊ С‡РµСЂРµР· 1вЂ“2 СЂР°Р±РѕС‡РёС… РґРЅСЏ РїРѕСЃР»Рµ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РЅР°Р»РёС‡РёСЏ. РђРґСЂРµСЃ С‚РѕС‡РєРё СѓРєР°Р·Р°РЅ РЅР° РЇРЅРґРµРєСЃ.РљР°СЂС‚Рµ; РІСЂРµРјСЏ СЃРѕРіР»Р°СЃСѓР№С‚Рµ Р·Р°СЂР°РЅРµРµ.';
+        } else {
+            title = 'Р”РѕСЃС‚Р°РІРєР° РїРѕ Р РѕСЃСЃРёРё';
+            message = city
+                ? 'Р”Р»СЏ РіРѕСЂРѕРґР° В«' + city + 'В» РѕСЂРёРµРЅС‚РёСЂ вЂ” 3вЂ“10 СЂР°Р±РѕС‡РёС… РґРЅРµР№. РўРѕС‡РЅС‹Р№ СЃСЂРѕРє Рё СЃС‚РѕРёРјРѕСЃС‚СЊ Р·Р°РІРёСЃСЏС‚ РѕС‚ СЃР»СѓР¶Р±С‹ Рё Р±СѓРґСѓС‚ РїРѕРґС‚РІРµСЂР¶РґРµРЅС‹ РїРµСЂРµРґ РѕС‚РїСЂР°РІРєРѕР№.'
+                : 'РћСЂРёРµРЅС‚РёСЂ РїРѕ Р РѕСЃСЃРёРё вЂ” 3вЂ“10 СЂР°Р±РѕС‡РёС… РґРЅРµР№. РЈРєР°Р¶РёС‚Рµ РіРѕСЂРѕРґ, С‡С‚РѕР±С‹ РєРѕРЅСЃСѓР»СЊС‚Р°РЅС‚ СѓС‚РѕС‡РЅРёР» РґРѕСЃС‚СѓРїРЅСѓСЋ СЃР»СѓР¶Р±Сѓ, СЃСЂРѕРє Рё СЃС‚РѕРёРјРѕСЃС‚СЊ.';
+        }
+
+        deliveryResult.querySelector('strong').textContent = title;
+        deliveryResult.querySelector('p').textContent = message;
     }
-});
-orderDialog.addEventListener('close', () => {
-    document.body.style.overflow = '';
+
+    if (deliveryMethod) deliveryMethod.addEventListener('change', updateDeliveryInfo);
+    if (deliveryCity) deliveryCity.addEventListener('input', updateDeliveryInfo);
+    updateDeliveryInfo();
+
+    // РљРЅРѕРїРєР° В«РќР°РІРµСЂС…В»
+    const topButton = document.querySelector('.to-top');
+    if (topButton) {
+        window.addEventListener('scroll', function () {
+            topButton.classList.toggle('is-visible', window.scrollY > 400);
+        });
+        topButton.addEventListener('click', function () {
+            window.scrollTo(0, 0);
+        });
+    }
 });

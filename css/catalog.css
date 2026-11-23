@@ -1,0 +1,106 @@
+/* Стили страницы: catalog */
+
+.catalog-hero {
+    background: linear-gradient(110deg,#f1f2e8,#e8efdf);
+    border-radius: 26px;
+    padding: 58px 64px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+}
+.catalog-hero:after {
+    content: "PF";
+    position: absolute;
+    right: 6%;
+    top: -45px;
+    font-size: 17rem;
+    line-height: 1;
+    color: #ffffff55;
+    font-weight: 800;
+    letter-spacing: -.13em;
+}
+.catalog-hero h1 {
+    font-size: clamp(2.8rem,5vw,4.7rem);
+    margin: 13px 0;
+}
+.catalog-hero>p {
+    max-width: 510px;
+}
+.catalog-hero__facts {
+    display: flex;
+    gap: 38px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+}
+.catalog-hero__facts span {
+    font-size: .75rem;
+    color: #66776a;
+}
+.catalog-hero__facts b {
+    display: block;
+    color: var(--green);
+    font-size: 1.3rem;
+}
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 36px;
+    align-items: start;
+}
+.catalog-filters {
+    background: #f3f4ed;
+    border: 1px solid #e5e9df;
+    border-radius: 20px;
+    padding: 25px;
+    position: sticky;
+    top: 112px;
+}
+.catalog-results__top {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.catalog-results__top h2 {
+    font-size: 1.8rem;
+    margin: 5px 0;
+}
+.catalog-results__top>span {
+    font-size: .8rem;
+    color: var(--muted);
+}
+.catalog-disclaimer {
+    margin-top: 25px;
+}
+@media (max-width:760px) {
+    .catalog-hero {
+        padding: 35px 25px;
+    }
+    .catalog-hero:after {
+        font-size: 10rem;
+        right: -10px;
+        top: 0;
+    }
+    .catalog-hero__facts {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .catalog-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .catalog-filters {
+        position: static;
+    }
+}
+@media (max-width:420px) {
+    .catalog-hero__facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.catalog-filters {
+    background: #f2f4eb;
+    border: 1px solid #e2e8da;
+}

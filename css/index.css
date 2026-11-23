@@ -1,0 +1,626 @@
+/* Стили страницы: index */
+
+.hero {
+    overflow: hidden;
+    background: linear-gradient(110deg,#f2f2e8 0%,#f9f8f0 54%,#e8efdf 100%);
+    position: relative;
+}
+.hero__grid {
+    min-height: 590px;
+    display: grid;
+    grid-template-columns: 1fr .92fr;
+    align-items: center;
+    gap: 55px;
+    padding-top: 48px;
+    padding-bottom: 55px;
+}
+.hero__content {
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
+}
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 30px;
+}
+.hero__trust {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 42px;
+    color: #617468;
+    font-size: .78rem;
+    font-weight: 700;
+}
+.hero__visual {
+    height: 440px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+.hero__visual-bg {
+    position: absolute;
+    width: 390px;
+    height: 390px;
+    border-radius: 48% 52% 58% 42%;
+    background: #d4e5b4;
+    transform: rotate(-12deg);
+    box-shadow: inset -25px -25px 0 #b6d18d;
+}
+.hero__visual-copy {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    line-height: .85;
+    transform: rotate(-8deg);
+    color: var(--green);
+}
+.hero__visual-copy span {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+.hero__visual-copy strong {
+    font-size: 6.5rem;
+    letter-spacing: -.1em;
+}
+.hero__visual-copy small {
+    letter-spacing: .3em;
+    font-weight: 800;
+    margin-top: 17px;
+}
+.hero__sticker {
+    position: absolute;
+    z-index: 3;
+    right: 8%;
+    top: 10%;
+    background: #e6a05e;
+    color: #fff;
+    border-radius: 50%;
+    width: 112px;
+    height: 112px;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    font-size: .72rem;
+    font-weight: 800;
+    line-height: 1.25;
+    transform: rotate(12deg);
+    box-shadow: 0 10px 25px #a65b3233;
+}
+.hero__leaf {
+    position: absolute;
+    width: 68px;
+    height: 34px;
+    border-radius: 100% 0 100% 0;
+    background: #779c56;
+    z-index: 2;
+}
+.ticker {
+    background: var(--green);
+    color: #e7f0d7;
+}
+.ticker__inner {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+.ticker b {
+    color: var(--lime);
+    font-size: 1.1rem;
+}
+.editorial {
+    background: var(--dark);
+    color: #fff;
+    padding: 85px 0;
+}
+.editorial__inner {
+    display: grid;
+    grid-template-columns: 1.1fr .8fr auto;
+    gap: 45px;
+    align-items: center;
+}
+.editorial h2 {
+    font-size: clamp(2.5rem,4vw,4.2rem);
+    line-height: 1.04;
+    letter-spacing: -.07em;
+    margin: 15px 0;
+}
+.editorial h2 em {
+    color: var(--lime);
+}
+.editorial p {
+    color: #c3d0c6;
+    max-width: 340px;
+}
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+.benefit {
+    padding: 30px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    transition: .25s;
+}
+.benefit:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+    border-color: #c9d9bf;
+}
+.benefit__number {
+    color: #86a45d;
+    font-weight: 800;
+    font-size: .8rem;
+    letter-spacing: .1em;
+}
+.benefit h3 {
+    font-size: 1.1rem;
+    margin: 18px 0 8px;
+}
+.benefit p {
+    color: var(--muted);
+    font-size: .88rem;
+    margin: 0;
+}
+@media (max-width:1050px) {
+    .editorial__inner {
+        grid-template-columns: 1fr 1fr;
+    }
+    .editorial__inner .button {
+        grid-column: 1/-1;
+        justify-self: start;
+    }
+}
+@media (max-width:760px) {
+    .hero__grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-top: 55px;
+    }
+    .hero__content {
+        padding-bottom: 0;
+    }
+    .hero__visual {
+        height: 300px;
+    }
+    .hero__visual-bg {
+        width: 270px;
+        height: 270px;
+    }
+    .hero__visual-copy span {
+        font-size: 2rem;
+    }
+    .hero__visual-copy strong {
+        font-size: 4.5rem;
+    }
+    .hero__sticker {
+        right: 5%;
+        top: 2%;
+        width: 85px;
+        height: 85px;
+        font-size: .6rem;
+    }
+    .hero__trust {
+        margin-top: 25px;
+    }
+    .hero__actions {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+    .ticker__inner {
+        font-size: .55rem;
+        letter-spacing: .1em;
+    }
+    .editorial {
+        padding: 60px 0;
+    }
+    .editorial__inner {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .editorial__inner .button {
+        grid-column: auto;
+    }
+}
+@media (max-width:420px) {
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+}
+.hero__visual {
+    position: relative;
+    isolation: isolate;
+}
+.hero__visual-bg {
+    background: radial-gradient(circle at 50% 45%,#e6edda 0,#d5e1c7 58%,#eef0e7 59%);
+    border-radius: 48% 52% 45% 55%;
+}
+.hero__product-image {
+    position: absolute;
+    z-index: 2;
+    height: 92%;
+    width: 70%;
+    object-fit: contain;
+    left: 15%;
+    bottom: 0;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 24px 20px #17362920);
+}
+.hero__sticker {
+    z-index: 3;
+    right: 4%;
+    top: 10%;
+    background: var(--lime);
+    color: var(--dark);
+    font-weight: 900;
+    letter-spacing: .12em;
+    transform: rotate(9deg);
+}
+.reviews-section {
+    background: #f5f6ef;
+}
+.review-controls {
+    display: flex;
+    gap: 10px;
+}
+.review-control {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #b7c7b6;
+    border-radius: 50%;
+    background: #fff;
+    color: #174b38;
+    font-size: 1.7rem;
+    cursor: pointer;
+    transition: .2s;
+}
+.review-control:hover {
+    background: #174b38;
+    color: #fff;
+}
+.review-window {
+    overflow: hidden;
+}
+.review-track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.review-card {
+    flex: 0 0 100%;
+    background: #fff;
+    border: 1px solid #e4e9df;
+    border-radius: 24px;
+    padding: 34px 38px;
+    min-height: 220px;
+    box-shadow: 0 14px 38px #183b2910;
+}
+.review-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: #7c8a7d;
+    font-size: .78rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.review-stars {
+    color: #8ba951;
+    letter-spacing: .2em;
+    font-size: 1rem;
+}
+.review-card blockquote {
+    margin: 28px 0 22px;
+    font-size: clamp(1.15rem,2.2vw,1.7rem);
+    line-height: 1.5;
+    max-width: 900px;
+    color: #23362b;
+}
+.review-card>strong {
+    display: block;
+    font-size: .9rem;
+}
+.review-card>small {
+    color: #7b887d;
+    font-size: .75rem;
+}
+.review-dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+}
+.review-dot {
+    width: 9px;
+    height: 9px;
+    border: 0;
+    border-radius: 50%;
+    background: #c9d2c4;
+    cursor: pointer;
+    padding: 0;
+}
+.review-dot.is-active {
+    width: 28px;
+    border-radius: 10px;
+    background: #245b43;
+}
+.hero__grid {
+    min-height: 540px;
+    gap: 42px;
+}
+.hero__visual {
+    height: 420px;
+}
+@media (max-width:760px) {
+    .hero__grid {
+        min-height: 0;
+        padding: 48px 0 42px;
+    }
+}
+.hero__visual--botanical {
+    min-height: 450px;
+}
+.botanical-art {
+    position: relative;
+    width: min(430px,88%);
+    height: 390px;
+    display: grid;
+    place-items: center;
+    z-index: 2;
+}
+.botanical-art__label {
+    position: relative;
+    z-index: 3;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background: #e4edda;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    box-shadow: 0 18px 45px #31583a18;
+    transform: rotate(-8deg);
+}
+.botanical-art__label small {
+    font-size: .68rem;
+    letter-spacing: .22em;
+    font-weight: 800;
+}
+.botanical-art__label strong {
+    font-size: 3.1rem;
+    line-height: 1.05;
+    letter-spacing: -.08em;
+}
+.botanical-art__label span {
+    font-size: .78rem;
+    color: #6c806a;
+}
+.botanical-art__leaf {
+    position: absolute;
+    display: block;
+    width: 130px;
+    height: 220px;
+    border-radius: 100% 0 100% 0;
+    background: linear-gradient(145deg,#b8d48f,#789e5c);
+    box-shadow: inset -10px -8px 18px #315b2a22;
+}
+.botanical-art__leaf:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 88%;
+    background: #eff5df88;
+    left: 50%;
+    top: 6%;
+    transform: rotate(18deg);
+}
+.botanical-art__leaf--one {
+    left: 30px;
+    top: 55px;
+    transform: rotate(-40deg);
+}
+.botanical-art__leaf--two {
+    right: 22px;
+    top: 34px;
+    transform: rotate(42deg) scale(.86);
+    background: linear-gradient(145deg,#d0e5a7,#91b76d);
+}
+.botanical-art__leaf--three {
+    left: 150px;
+    bottom: 0;
+    transform: rotate(135deg) scale(.7);
+    background: linear-gradient(145deg,#9fbe78,#5d8952);
+}
+.botanical-art__seed {
+    position: absolute;
+    width: 42px;
+    height: 62px;
+    border-radius: 70% 30% 70% 30%;
+    background: #d6bd8b;
+    box-shadow: 0 8px 16px #5b553522;
+}
+.botanical-art__seed--one {
+    right: 22px;
+    bottom: 50px;
+    transform: rotate(35deg);
+}
+.botanical-art__seed--two {
+    left: 35px;
+    bottom: 35px;
+    transform: rotate(-28deg) scale(.75);
+}
+.hero__sticker {
+    background: var(--lime);
+    color: var(--dark);
+    box-shadow: 0 10px 25px #31583a20;
+}
+.reviews-section {
+    background: #f5f6ef;
+}
+.review-window {
+    overflow: hidden;
+    border-radius: 22px;
+}
+.review-track {
+    display: flex;
+    transition: transform .4s ease;
+    align-items: stretch;
+}
+.review-card {
+    flex: 0 0 100%;
+    min-height: 0;
+    padding: 30px 36px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+}
+.review-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-size: .78rem;
+    color: #89958a;
+    text-transform: uppercase;
+}
+.review-card blockquote {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin: 18px 0 20px;
+    max-width: 980px;
+    color: #314238;
+}
+.review-card>strong {
+    font-size: .88rem;
+}
+.review-card>small {
+    font-size: .76rem;
+    color: var(--muted);
+}
+.review-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+@media (max-width:760px) {
+    .hero__visual--botanical {
+        height: 320px;
+        min-height: 320px;
+    }
+    .botanical-art {
+        height: 290px;
+    }
+    .botanical-art__label {
+        width: 175px;
+        height: 175px;
+    }
+    .botanical-art__label strong {
+        font-size: 2.4rem;
+    }
+    .botanical-art__leaf {
+        width: 90px;
+        height: 155px;
+    }
+    .botanical-art__leaf--one {
+        left: 12px;
+        top: 35px;
+    }
+    .botanical-art__leaf--two {
+        right: 5px;
+        top: 25px;
+    }
+    .botanical-art__leaf--three {
+        left: 100px;
+    }
+    .hero__sticker {
+        right: 0;
+        top: 0;
+        width: 86px;
+        height: 86px;
+        font-size: .58rem;
+    }
+    .review-card {
+        padding: 22px;
+        min-height: 0;
+    }
+    .review-card blockquote {
+        font-size: .94rem;
+        line-height: 1.65;
+    }
+    .review-card__top {
+        flex-direction: row;
+    }
+}
+@media (max-width:420px) {
+    .review-card {
+        padding: 18px;
+    }
+    .review-card blockquote {
+        font-size: .88rem;
+    }
+}
+.hero h1 {
+    font-size: clamp(2.65rem,4.7vw,4.45rem);
+}
+.review-card blockquote {
+    font-size: 1rem;
+}
+.reviews-section .container {
+    max-width: 1080px;
+}
+.home-products .product-card__image {
+    height: 340px;
+    padding: 20px;
+}
+.home-products .product-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+}
+.home-products .product-card:hover .product-card__image img {
+    transform: none;
+}
+.hero__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 380px;
+}
+.hero__logo {
+    width: 260px;
+    height: 260px;
+    object-fit: contain;
+}
+
+
+/* Видео в главном блоке */
+.hero__video {
+    width: 100%;
+    height: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 28px;
+    display: block;
+}
+@media (max-width: 760px) {
+    .hero__video {
+        max-height: 300px;
+    }
+}
