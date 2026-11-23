@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yaroslavamyakota-arch.github.io/kr1-html-css-shop/sitemap.xml

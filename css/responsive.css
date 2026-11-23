@@ -324,3 +324,30 @@ img {
         bottom: 12px;
     }
 }
+
+/* Доступность: ссылка пропуска навигации видна при переходе клавишей Tab. */
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10000;
+    padding: 12px 16px;
+    color: #ffffff;
+    background: #183d2b;
+    border-radius: 6px;
+    transform: translateY(-150%);
+}
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Основное содержимое получает фокус после перехода по skip-link. */
+#main-content:focus {
+    outline: 2px solid #315b43;
+    outline-offset: 4px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
