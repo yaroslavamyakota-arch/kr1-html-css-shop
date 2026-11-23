@@ -672,3 +672,97 @@ img {
         width: 100%;
     }
 }
+
+/* Исправление блока преимуществ на телефонах */
+@media (max-width: 760px) {
+    .benefit-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        width: 100%;
+    }
+
+    .benefit-grid > .benefit {
+        width: 100%;
+        min-width: 0;
+        padding: 24px;
+    }
+
+    .benefit h3,
+    .benefit p {
+        overflow-wrap: break-word;
+    }
+}
+
+/* Не допускаем горизонтального прокручивания из-за широких блоков */
+@media (max-width: 760px) {
+    .editorial,
+    .editorial__inner,
+    .reviews-section,
+    .reviews-section .container {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .editorial__inner > *,
+    .reviews-section > * {
+        min-width: 0;
+    }
+}
+
+/* Каталог на телефонах: две карточки товаров в одном ряду */
+@media (max-width: 460px) {
+    .products-grid--catalog {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .products-grid--catalog .product-card {
+        min-width: 0;
+    }
+
+    .products-grid--catalog .product-card__image {
+        height: 155px;
+        padding: 8px;
+    }
+
+    .products-grid--catalog .product-card__body {
+        padding: 10px;
+    }
+
+    .products-grid--catalog .product-card h3 {
+        font-size: 0.78rem;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+    }
+
+    .products-grid--catalog .product-card__bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .products-grid--catalog .product-card__bottom strong {
+        font-size: 0.95rem;
+    }
+
+    .products-grid--catalog .product-card__button {
+        width: 100%;
+        padding: 9px 6px;
+        font-size: 0.68rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .products-grid--catalog {
+        gap: 9px;
+    }
+
+    .products-grid--catalog .product-card__image {
+        height: 140px;
+    }
+
+    .products-grid--catalog .product-card__body {
+        padding: 8px;
+    }
+}
